@@ -1,5 +1,6 @@
 """XML-RPC methods of Zinnia metaWeblog API"""
 from datetime import datetime
+from datetime import timezone as datetime_timezone
 from xmlrpc.client import DateTime
 from xmlrpc.client import Fault
 
@@ -280,7 +281,7 @@ def new_post(blog_id, username, password, post, publish):
             post['dateCreated'].value[:18], '%Y-%m-%dT%H:%M:%S')
         if settings.USE_TZ:
             creation_date = timezone.make_aware(
-                creation_date, timezone.utc)
+                creation_date, datetime_timezone.utc)
     else:
         creation_date = timezone.now()
 
@@ -333,7 +334,7 @@ def edit_post(post_id, username, password, post, publish):
             post['dateCreated'].value[:18], '%Y-%m-%dT%H:%M:%S')
         if settings.USE_TZ:
             creation_date = timezone.make_aware(
-                creation_date, timezone.utc)
+                creation_date, datetime_timezone.utc)
     else:
         creation_date = entry.creation_date
 
